@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Unity MCP Bridge",
+    "description": "Single-package integration for MCP-for-Unity (CoplayDev/unity-mcp): mounts the mcp__unity__* tools, adds a unity_mcp_status bridge diagnostic, and ships the on-demand unity-mcp skill."
+  }
+}

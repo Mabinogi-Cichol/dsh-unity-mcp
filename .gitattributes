@@ -1,0 +1,10 @@
+# Repository text files stay LF in the object database; Windows checkouts may use CRLF.
+* text=auto eol=lf
+
+# Keep the bundle patch and skill body byte-stable: the loader reads the YAML and
+# the plugin reads SKILL.md directly from disk.
+*.yml text eol=lf
+*.md text eol=lf
+*.js text eol=lf
+*.json text eol=lf
+*.svg text eol=lf

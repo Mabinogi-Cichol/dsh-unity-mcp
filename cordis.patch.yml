@@ -1,0 +1,38 @@
+# Unity MCP (CoplayDev/unity-mcp) integration bundle — single package.
+#
+# Row 1 mounts the shipped MCP client bridge against the MCP-for-Unity server.
+# The server is normally started by the Unity Editor (Window -> MCP for Unity),
+# or manually:  uvx --from mcpforunityserver mcp-for-unity \
+#                 --transport http --http-url http://127.0.0.1:8080
+#
+# Override the endpoint for another port/instance without editing this file:
+#   $env:UNITY_MCP_URL = 'http://127.0.0.1:6401/mcp'
+#
+# Row 2 mounts this package's Host module, which registers BOTH:
+#   - the `unity_mcp_status` tool (out-of-band bridge health check)
+#   - the `unity-mcp` skill (playbook from ./skills/unity-mcp/SKILL.md, loaded on demand)
+- insert:
+    - id: mcp-unity
+      name: '@deepseek-ai/dsh-mcp-client'
+      config:
+        serverName: unity
+        transport: streamable-http
+        url: !!js 'process.env.UNITY_MCP_URL || "http://127.0.0.1:8080/mcp"'
+        # Unity domain reloads and play-mode waits outlast the 60s default.
+        toolCallTimeoutMs: 180000
+        # Server instructions carry the multi-instance routing rules; keep them whole.
+        maxInstructionBytes: 32768
+        # The Editor may be closed when the Harness boots: stay mounted and let
+        # the reconnect supervisor attach once the bridge appears.
+        failOnStartupError: false
+        reconnect:
+          enabled: true
+          initialDelayMs: 2000
+          maxDelayMs: 30000
+          maxAttempts: 30
+
+    - id: mcp-unity-bridge
+      name: '@local/dsh-unity-mcp'
+      config:
+        endpoint: !!js 'process.env.UNITY_MCP_URL || "http://127.0.0.1:8080/mcp"'
+        projectPaths: !!js 'process.env.UNITY_PROJECT_PATH ? String(process.env.UNITY_PROJECT_PATH).split(";").filter(Boolean) : []'

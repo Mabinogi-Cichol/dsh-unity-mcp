@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Unity MCP 桥接",
+    "description": "单包接入 MCP-for-Unity（CoplayDev/unity-mcp）：注册 mcp__unity__* 工具、提供 unity_mcp_status 桥接诊断，并附带按需加载的 unity-mcp 技能。"
+  }
+}
