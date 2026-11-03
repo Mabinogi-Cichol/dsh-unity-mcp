@@ -3,3 +3,6 @@ node_modules/
 .DS_Store
 Thumbs.db
 *.tmp
+
+# 本机备忘：工程路径、端口约定等个人环境信息，不随仓库分发
+LOCAL-NOTES.md

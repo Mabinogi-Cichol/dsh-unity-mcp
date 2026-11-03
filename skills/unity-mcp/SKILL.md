@@ -73,11 +73,12 @@ get_test_job({ job_id, wait_timeout: 30 })    → 轮询，PlayMode 首轮可能
 - 不要 `generate_preview=true`，base64 缩略图会吃掉大量 token。
 - 批量读用 `batch_execute` 的只读命令并行，不要在对话里堆 N 次往返。
 
-## 7. 本机环境备忘
+## 7. 工程与端点
 
-- 客户端工程：`E:\Unity\StarWings\ClientDevelopment`（Unity 2022.3.62f2），MCP pid 记录在 `Library/MCPForUnity/RunState/mcp_http_*.pid`。
-- UI 工程另开实例（`E:\Unity\StarWingsUI\WingsUi_3.3.0`）；两边都要操作时，每个工程各起一个端点，用 `UNITY_MCP_URL` 或 `unity_instance` 区分。
-- 端点默认 `http://127.0.0.1:8080/mcp`；换端口改 `UNITY_MCP_URL` 后重载插件行。
+- 单个工程时用默认端点即可：`http://127.0.0.1:8080/mcp`。
+- 同时打开多个工程时，每个编辑器实例各自需要一个 server 端点（不同端口），用 `UNITY_MCP_URL` 切换，或在调用里传 `unity_instance` 指定。pid 记录在每个工程的 `<Project>/Library/MCPForUnity/RunState/mcp_http_<port>.pid`，可用 `unity_mcp_status({ projectPath })` 核对进程是否存活。
+- 换端点后重载对应插件行（或重启 Harness），端点表达式只在行激活时求值。
+- 若仓库根目录存在 `LOCAL-NOTES.md`（不入库的个人备忘），先读取其中的本机工程路径与端口约定，再决定 `projectPath` 与 `unity_instance`。
 
 ## 8. 停下来问人的时机
 
@@ -87,4 +88,4 @@ get_test_job({ job_id, wait_timeout: 30 })    → 轮询，PlayMode 首轮可能
 
 ## 版本
 
-本正文随 `@local/dsh-unity-mcp` 1.1.0 一起分发（单包）；早前独立的 `@local/dsh-unity-mcp-skill` 已合并进本包。
+本正文随 `@local/dsh-unity-mcp` 1.0.0 一起分发（单包）；早前独立的 `@local/dsh-unity-mcp-skill` 已合并进本包。

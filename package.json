@@ -1,6 +1,6 @@
 {
   "name": "@local/dsh-unity-mcp",
-  "version": "1.1.0",
+  "version": "1.0.0",
   "private": true,
   "type": "module",
   "description": "DeepSeek Harness single-package integration for MCP-for-Unity (CoplayDev/unity-mcp): MCP transport row, unity_mcp_status diagnostic tool, and the on-demand unity-mcp skill.",

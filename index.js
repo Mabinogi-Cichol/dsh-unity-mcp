@@ -106,7 +106,7 @@ function registerTool(ctx, config = {}) {
         },
         projectPath: {
           type: 'string',
-          description: 'Unity 工程根目录，用于读取 RunState pid 文件，如 E:\\Unity\\MyProject。',
+          description: 'Unity 工程根目录，用于读取 RunState pid 文件；Windows 形如 D:\\UnityProjects\\MyProject，macOS 形如 /Users/me/UnityProjects/MyProject。',
         },
         listTools: {
           type: 'boolean',
@@ -311,7 +311,7 @@ async function handshakeOf(url, timeoutMs, wantTools) {
       {
         protocolVersion: '2025-06-18',
         capabilities: {},
-        clientInfo: { name: 'dsh-unity-mcp', version: '1.1.0' },
+        clientInfo: { name: 'dsh-unity-mcp', version: '1.0.0' },
       },
       undefined,
       timeoutMs,
